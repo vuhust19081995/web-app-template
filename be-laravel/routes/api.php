@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\Api\Auth\RegisterController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
-
-Route::middleware('guest')->name('api.')->group(function() {
-    Route::post('register', [RegisterController::class, 'store'])->name('register');
+Route::middleware(['auth:sanctum'])->group(function() {
+    Route::prefix('users')->group(function() {
+        Route::get('/', [UserController::class, 'index']);
+        Route::get('/{id}', [UserController::class, 'show']);
+    });
 });
+
+require __DIR__.'/api_auth.php';
