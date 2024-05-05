@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [RegisteredUserController::class, 'store']);
 
-Route::post('login', [AuthenticatedSessionController::class, 'store']);
+Route::post('login', [AuthenticatedSessionController::class, 'store'])->middleware(['verified']);
 
 Route::post('forgot-password', [PasswordResetLinkController::class, 'store']);
 
 Route::post('reset-password', [NewPasswordController::class, 'store']);
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('verify-email', EmailVerificationPromptController::class);
 
     Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)

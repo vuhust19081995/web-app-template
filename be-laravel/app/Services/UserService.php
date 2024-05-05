@@ -2,9 +2,12 @@
 
 namespace App\Services;
 
-class UserService
-{
-    public function login() {
+use App\Models\User;
 
+class UserService extends BaseService
+{
+
+    public function model(): mixed {
+        return User::class;
     }
 }

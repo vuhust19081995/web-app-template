@@ -4,16 +4,20 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\Controller;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct(protected UserService $userService){}
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $user = $this->userService->paginate();
+
+        return $this->responsePagination($user);
     }
 
     /**

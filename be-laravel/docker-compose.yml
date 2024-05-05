@@ -1,0 +1,10 @@
+version: '3.9'  # Specify the docker-compose version
+
+services:
+  mailhog:
+    image: mailhog/mailhog  # Use the official MailHog image
+    ports:
+      - 1025:1025  # Map container port 1025 (SMTP) to host port 1025
+      - 8025:8025  # Map container port 8025 (Web UI) to host port 8025
+    logging:
+      driver: none  # Disable logging for MailHog (optional)
