@@ -30,4 +30,8 @@ class Controller extends BaseController
     protected function responseErrorUnauthorized() {
         return $this->errorUnauthorized(trans('auth.failed'));
     }
+
+    protected function resposneServerError() {
+        return $this->fail('Server Error');
+    }
 }

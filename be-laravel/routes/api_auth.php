@@ -15,7 +15,7 @@ Route::post('register', [RegisteredUserController::class, 'store']);
 
 Route::post('login', [AuthenticatedSessionController::class, 'store'])->middleware(['verified']);
 
-Route::post('forgot-password', [PasswordResetLinkController::class, 'store']);
+Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->middleware(['verified']);
 
 Route::post('reset-password', [NewPasswordController::class, 'store']);
 
