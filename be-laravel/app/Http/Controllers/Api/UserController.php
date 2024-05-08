@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Controller;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -15,6 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        return $this->success(Auth::user());
         $user = $this->userService->paginate();
 
         return $this->responsePagination($user);
