@@ -24,19 +24,19 @@ class AuthenticatedSessionController extends Controller
 
         $token = $this->authService->generateToken();
 
-        // $refreshToken = $request->user()->createRefreshToken()->plainTextToken;
+        $refreshToken = $request->user()->createRefreshToken()->plainTextToken;
 
-        return $this->respondWithToken($token);
+        return $this->respondWithToken($token, $refreshToken);
     }
 
-    protected function respondWithToken(string $token)
+    protected function respondWithToken(string $token, $refreshToken)
     {
         return $this->success(
             [
                 'access_token' => $token,
                 'token_type' => 'Bearer',
-                'expires_in' => null,
-                // 'refresh_token' => $refreshToken,
+                'expires_in' => config('sanctum.expiration') * 60, // seconds
+                'refresh_token' => $refreshToken,
                 'user' => Auth::user(),
             ]
         );
